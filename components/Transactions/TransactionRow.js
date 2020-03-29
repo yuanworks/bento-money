@@ -1,21 +1,24 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-export function TransactionRow({ transaction }) {
+export function TransactionRow({ transaction, even }) {
   
   const { amount, date, payee, currency } = transaction;
 
   return (
-    <View style={styles.row}>
+    <View style={[ styles.row, even && styles.evenRow ]}>
       <Text style={styles.cell}>{ date }</Text>
       <TextInput style={styles.cell} value={payee} />
-      <TextInput style={[ styles.cell, styles.amount, amount < 0 && styles.income ]} value={displayNumber(-amount, currency)} />
+      <View style={styles.amountContainer}>
+        <Text style={[ styles.currency, amount < 0 && styles.income ]}>{ currencies[currency] || currency }</Text>
+        <TextInput style={[ styles.amount, amount < 0 && styles.income ]} value={displayNumber(-amount)} />
+      </View>
     </View>
   );
 }
 
-const displayNumber = (number, currency) => {
-  return `${currencies[currency] || currency} ${parseFloat(number).toFixed(2)}`;
+const displayNumber = (number) => {
+  return parseFloat(number).toFixed(2);
 }
 
 const currencies = {
@@ -30,6 +33,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: 'lightgray',
+    padding: 4,
+  },
+
+  evenRow: {
+    backgroundColor: '#fcfcfc',
   },
 
   cell: {
@@ -40,8 +48,21 @@ const styles = StyleSheet.create({
     color: '#21ba45'
   },
 
+  amountContainer: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    fontFamily: 'space-mono',
+  },
+
+  currency: {
+    width: 50,
+    fontFamily: 'space-mono',
+  },
+
   amount: {
-    textAlign: 'end',
+    textAlign: 'right',
+    width: 100,
     fontFamily: 'space-mono',
   },
 

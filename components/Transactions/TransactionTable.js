@@ -5,14 +5,14 @@ import { TransactionRow } from './TransactionRow';
 export default function TransactionTable({ transactions }) {
 
   return (
-  <View>
+  <View style={{ maxWidth: '100%' }}>
     <View style={styles.header}>
       <Text style={styles.th}>Date</Text>
       <Text style={styles.th}>Payee</Text>
       <Text style={styles.th}>Amount</Text>
     </View>
     <View>
-      { transactions && transactions.map(transaction => <TransactionRow transaction={transaction} />)}
+      { transactions && transactions.map((transaction, i) => <TransactionRow transaction={transaction} even={i % 2} key={transaction.id} />)}
     </View>
   </View>
   );
