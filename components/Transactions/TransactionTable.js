@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
     color: '#aeaeae',
     textTransform: 'uppercase',
     fontWeight: 'bold',
-    padding: 4,
+    padding: 8,
   },
 });
