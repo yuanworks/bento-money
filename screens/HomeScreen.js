@@ -5,8 +5,17 @@ import * as WebBrowser from 'expo-web-browser';
 
 import { MonoText } from '../components/StyledText';
 import TransactionTable from '../components/Transactions/TransactionTable';
+import { useDispatch, useSelector } from 'react-redux';
+import { increment, counterSelector } from '../slices/counter';
 
 export default function HomeScreen() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => { dispatch(increment()) }, []);
+  const number = useSelector(counterSelector);
+
+  console.log(number);
 
   useEffect(() => {
     Alert.alert(
