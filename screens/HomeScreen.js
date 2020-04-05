@@ -6,20 +6,14 @@ import * as WebBrowser from 'expo-web-browser';
 import { MonoText } from '../components/StyledText';
 import TransactionTable from '../components/Transactions/TransactionTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { increment, counterSelector } from '../slices/counter';
 import { fetchTransactions, selectTransactionsByDate } from '../slices/transactionsSlice';
 
 export default function HomeScreen() {
 
   const dispatch = useDispatch();
-
-  useEffect(() => { dispatch(increment()) }, []);
-  const number = useSelector(counterSelector);
-
   const transactions = useSelector(state => selectTransactionsByDate(state, 2020, 4));
 
-  console.log(number);
-
+  /*
   useEffect(() => {
     Alert.alert(
       'Alert Title',
@@ -34,43 +28,9 @@ export default function HomeScreen() {
 
     console.log('hi');
   }, []);
-  
-  //const [ transactions, setTransactions ] = useState(null);
+  */
 
   const fetch2 = () => { dispatch(fetchTransactions()); };
-
-  /*
-  const fetchTransactionsLocal = async () => {
-
-    try {
-      const response = await fetch('https://dev.lunchmoney.app/v1/transactions', {
-        method: 'GET',
-        headers: {
-          Accept         : 'application/json',
-          'Content-Type' : 'application/json',
-          Authorization  : 'Bearer b8a0da897c53ddbda9995ba833fa8b7fc1cb9c4be67d0b82d7',
-        }
-      });
-
-      let json = await response.json()
-      setTransactions(json.transactions);
-
-    } catch (error) {
-      console.error(error);
-    }
-
-    /*
-    console.log('hi');
-
-    fetch('https://dev.lunchmoney.app/v1/transactions', {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer b8a0da897c53ddbda9995ba833fa8b7fc1cb9c4be67d0b82d7',
-    }}).then(response => response.json()).then((json) => console.log(JSON.stringify(json))); //Alert.alert('reply', json, [{text: 'OK'}]));
-    */
-  //}
 
   return (
     <View style={styles.container}>

@@ -66,7 +66,6 @@ export function fetchTransactions() {
       });
 
       const data = await response.json();
-      console.log('data:', data);
       dispatch(getTransactionsSuccess(data.transactions));
     } catch (error) {
       console.log('error:', error);
