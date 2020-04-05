@@ -7,6 +7,7 @@ import { MonoText } from '../components/StyledText';
 import TransactionTable from '../components/Transactions/TransactionTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { increment, counterSelector } from '../slices/counter';
+import { fetchTransactions } from '../slices/transactions';
 
 export default function HomeScreen() {
 
@@ -34,10 +35,12 @@ export default function HomeScreen() {
   
   const [ transactions, setTransactions ] = useState(null);
 
-  const fetchTransactions = async () => {
+  const fetch2 = () => { dispatch(fetchTransactions()); };
+
+  const fetchTransactionsLocal = async () => {
 
     try {
-      let response = await fetch('https://dev.lunchmoney.app/v1/transactions', {
+      const response = await fetch('https://dev.lunchmoney.app/v1/transactions', {
         method: 'GET',
         headers: {
           Accept         : 'application/json',
@@ -89,7 +92,7 @@ export default function HomeScreen() {
 
           <TextInput placeholder='hihi' />
           
-          <Button title="FETCH" onPress={fetchTransactions} />
+          <Button title="FETCH" onPress={/*fetchTransactions*/ fetch2} />
 
           <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
             <MonoText>screens/HomeScreen.js</MonoText>

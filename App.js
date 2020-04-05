@@ -8,13 +8,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
-import { Provider } from 'react-redux';
-import counterReducer from './slices/counter';
 
+import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './slices';
 
 const store = configureStore({
-  reducer: counterReducer,
+  reducer: rootReducer,
 });
 
 const Stack = createStackNavigator();
