@@ -7,7 +7,7 @@ import { MonoText } from '../components/StyledText';
 import TransactionTable from '../components/Transactions/TransactionTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { increment, counterSelector } from '../slices/counter';
-import { fetchTransactions, selectTransactionsByDate } from '../slices/transactions';
+import { fetchTransactions, selectTransactionsByDate } from '../slices/transactionsSlice';
 
 export default function HomeScreen() {
 

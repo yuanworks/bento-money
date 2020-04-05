@@ -27,13 +27,14 @@ const transactionsSlice = createSlice({
 
 export const { getTransactions, getTransactionsSuccess } = transactionsSlice.actions;
 
+// add sorting (date, category, amount (? dollar calculated)) + asc/desc
 export const selectTransactionsByDate = createSelector(
   state => state.transactions,
   (_, year, __) => year,
   (_, __, month) => month,
   (transactions, year, month) => {
-    console.log('transactions, year, month:', transactions.items, year, month);
-    return transactions.items[year] && transactions.items[year][month]
+    return transactions.items[year] && Object.values(transactions.items[year][month]).sort((t1, t2) => t2.id - t1.id);
+    //return transactions.items[year] && transactions.items[year][month]
   }
 );
 

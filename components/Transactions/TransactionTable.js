@@ -12,7 +12,7 @@ export default function TransactionTable({ transactions }) {
       <Text style={styles.th}>Amount</Text>
     </View>
     <View>
-      { transactions && Object.entries(transactions).map(([key, transaction], i) => <TransactionRow transaction={transaction} even={i % 2} key={key} />)}
+      { transactions && transactions.map((transaction, i) => <TransactionRow transaction={transaction} even={i % 2} key={transaction.id} />)}
     </View>
   </View>
   );
