@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
     flex: 2,
     display: 'flex',
     flexDirection: 'row',
-    fontFamily: 'space-mono',
   },
 
   currency: {

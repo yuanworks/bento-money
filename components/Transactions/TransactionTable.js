@@ -12,7 +12,7 @@ export default function TransactionTable({ transactions }) {
       <Text style={styles.th}>Amount</Text>
     </View>
     <View>
-      { transactions && transactions.map((transaction, i) => <TransactionRow transaction={transaction} even={i % 2} key={transaction.id} />)}
+      { transactions && Object.entries(transactions).map(([key, transaction], i) => <TransactionRow transaction={transaction} even={i % 2} key={key} />)}
     </View>
   </View>
   );
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: '100%',
     display: 'flex',
-    color: '#f03',
     flexDirection: 'row',
   },
 

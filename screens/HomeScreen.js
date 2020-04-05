@@ -7,7 +7,7 @@ import { MonoText } from '../components/StyledText';
 import TransactionTable from '../components/Transactions/TransactionTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { increment, counterSelector } from '../slices/counter';
-import { fetchTransactions } from '../slices/transactions';
+import { fetchTransactions, selectTransactionsByDate } from '../slices/transactions';
 
 export default function HomeScreen() {
 
@@ -15,6 +15,8 @@ export default function HomeScreen() {
 
   useEffect(() => { dispatch(increment()) }, []);
   const number = useSelector(counterSelector);
+
+  const transactions = useSelector(state => selectTransactionsByDate(state, 2020, 4));
 
   console.log(number);
 
@@ -33,10 +35,11 @@ export default function HomeScreen() {
     console.log('hi');
   }, []);
   
-  const [ transactions, setTransactions ] = useState(null);
+  //const [ transactions, setTransactions ] = useState(null);
 
   const fetch2 = () => { dispatch(fetchTransactions()); };
 
+  /*
   const fetchTransactionsLocal = async () => {
 
     try {
@@ -67,7 +70,7 @@ export default function HomeScreen() {
       Authorization: 'Bearer b8a0da897c53ddbda9995ba833fa8b7fc1cb9c4be67d0b82d7',
     }}).then(response => response.json()).then((json) => console.log(JSON.stringify(json))); //Alert.alert('reply', json, [{text: 'OK'}]));
     */
-  }
+  //}
 
   return (
     <View style={styles.container}>

@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 import { normalizeTransactions } from '../utils/transactionUtil';
 
 const initialState = {
   loading: 'idle',
   // errors = null
-  transactions: {},
+  items: {},
 };
 
 const transactionsSlice = createSlice({
@@ -17,7 +17,7 @@ const transactionsSlice = createSlice({
 
     getTransactionsSuccess: (state, action) => {
       state.loading = 'idle+success',
-      state.transactions = normalizeTransactions(action.payload, state.transactions);
+      state.items = normalizeTransactions(action.payload, state.items);
     },
 
     //failure => state.loading = 'failure'
@@ -26,7 +26,27 @@ const transactionsSlice = createSlice({
 
 
 export const { getTransactions, getTransactionsSuccess } = transactionsSlice.actions;
-export const transactionsSelector = state => state.transactions;
+
+export const selectTransactionsByDate = createSelector(
+  state => state.transactions,
+  (_, year, __) => year,
+  (_, __, month) => month,
+  (transactions, year, month) => {
+    console.log('transactions, year, month:', transactions.items, year, month);
+    return transactions.items[year] && transactions.items[year][month]
+  }
+);
+
+/* --> THIS ONE WORKS
+
+export const selectTransactionsByDate = createSelector(
+  [ state => state.transactions, (_, year, __) => year, (_, __, month) => month, ],
+  (state, year, month) => {
+    console.log('transactions, year, month:', state.transactions, year, month);
+    return state.transactions[year] && state.transactions[year][month]
+  }
+);
+*/
 
 export default transactionsSlice.reducer;
 
