@@ -19,3 +19,9 @@ export function normalizeTransactions(newTransactions, existingTransactions) {
 
   return existingTransactions;
 }
+
+export function sortTransactions(transactions, sortBy, direction) {
+  return Object.values(transactions).sort((t1, t2) => {
+    return direction === 'asc' ? t1[sortBy] - t2[sortBy] : t2[sortBy] - t1[sortBy]
+  });
+}

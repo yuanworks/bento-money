@@ -1,21 +1,26 @@
 import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
-import { normalizeTransactions } from '../utils/transactionUtil';
+import { normalizeTransactions, sortTransactions } from '../utils/transactionUtil';
 import * as transactionsAPI from '../apis/transactionsAPI';
 
+// INITIAL STATE
+// -------------
 const initialState = {
-  loading : 'idle',
-  error   : null,
-  
-  items   : {},
-  sortBy  : 'id',
-  sortDir : 'desc',
+  loading  : 'idle',
+  error    : null,
+  entities : {},
+  sortBy   : 'id',
+  sortDir  : 'desc',
 };
 
+// THUNKS
+// ------
 export const fetchTransactions = createAsyncThunk(
   'transactions/fetch',
   async (arg, thunkAPI) => transactionsAPI.fetchAll(),
 )
 
+// SLICE
+// -----
 const transactionsSlice = createSlice({
   name: 'transactions',
   initialState,
@@ -28,7 +33,7 @@ const transactionsSlice = createSlice({
 
     [fetchTransactions.fulfilled]: (state, action) => {
       state.loading = 'idle';
-      state.items = normalizeTransactions(action.payload.transactions, state.items);
+      state.entities = normalizeTransactions(action.payload.transactions, state.entities);
     },
 
     [fetchTransactions.rejected]: (state, action) => {
@@ -38,14 +43,15 @@ const transactionsSlice = createSlice({
   }
 });
 
-// add sorting (date, category, amount (? dollar calculated)) + asc/desc
+// SELECTORS
+// ---------
 export const selectTransactionsByDate = createSelector(
   state => state.transactions,
   (_, year, __) => year,
   (_, __, month) => month,
+
   (transactions, year, month) => {
-    return transactions.items[year] && Object.values(transactions.items[year][month]).sort((t1, t2) => t2.id - t1.id);
-    //return transactions.items[year] && transactions.items[year][month]
+    return transactions.entities[year] && sortTransactions(transactions.entities[year][month], transactions.sortBy, transactions.sortDir)
   }
 );
 
