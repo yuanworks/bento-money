@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, TextInput, Alert, Button } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, TextInput, Alert, Button, ActivityIndicator } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 
 import { MonoText } from '../components/StyledText';
 import TransactionTable from '../components/Transactions/TransactionTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTransactions, selectTransactionsByDate } from '../slices/transactionsSlice';
+import { fetchTransactions, selectTransactionsByDate, transactionIsLoadingSelector } from '../slices/transactionsSlice';
+import NewTransactionButton from '../components/Transactions/NewTransactionButton';
 
 export default function HomeScreen() {
 
   const dispatch = useDispatch();
   const transactions = useSelector(state => selectTransactionsByDate(state, 2020, 4));
+  const transactionsLoading = useSelector(transactionIsLoadingSelector);
 
   /*
   useEffect(() => {
@@ -30,7 +32,7 @@ export default function HomeScreen() {
   }, []);
   */
 
-  const fetch2 = () => { dispatch(fetchTransactions()); };
+  const handleFetchPress = () => { dispatch(fetchTransactions()); };
 
   return (
     <View style={styles.container}>
@@ -55,7 +57,7 @@ export default function HomeScreen() {
 
           <TextInput placeholder='hihi' />
           
-          <Button title="FETCH" onPress={/*fetchTransactions*/ fetch2} />
+          <Button title="FETCH" onPress={handleFetchPress} />
 
           <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
             <MonoText>screens/HomeScreen.js</MonoText>
@@ -66,7 +68,10 @@ export default function HomeScreen() {
           </Text>
         </View>
 
-        <TransactionTable transactions={transactions} />
+        { transactionsLoading === 'pending'
+        ? <ActivityIndicator size="large" color='lightgray' />
+        : <TransactionTable transactions={transactions} />
+        }
 
         <View style={styles.helpContainer}>
           <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
@@ -75,13 +80,15 @@ export default function HomeScreen() {
         </View>
       </ScrollView>
 
-      <View style={styles.tabBarInfoContainer}>
+      {/* <View style={styles.tabBarInfoContainer}>
         <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
 
         <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
           <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
         </View>
-      </View>
+      </View> */}
+
+      <NewTransactionButton />
     </View>
   );
 }

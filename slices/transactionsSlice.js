@@ -55,4 +55,6 @@ export const selectTransactionsByDate = createSelector(
   }
 );
 
+export const transactionIsLoadingSelector = state => state.transactions.loading;
+
 export default transactionsSlice.reducer;
