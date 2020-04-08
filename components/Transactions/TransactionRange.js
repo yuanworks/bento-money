@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, Platform } from "react-native";
 import moment from 'moment';
 import { Feather } from '@expo/vector-icons';
 import { previousMonth, nextMonth } from '../../utils/transactionUtil';
@@ -20,22 +20,33 @@ export default function TransactionRange() {
   const onPressPreviousMonth = () => dispatch(setRange(previousMonth(momentDate && momentDate.format('YYYY-MM-DD'))));
   const onPressNextMonth = () => dispatch(setRange(nextMonth(momentDate && momentDate.format('YYYY-MM-DD'))));
 
+  const TransactionNavigaton = ({ direction }) => {
+
+    const chevron = (direction === 'next')
+    ? <Feather name='chevron-right' color='#767676' size={24} onTouchEnd={onPressNextMonth} />
+    : <Feather name='chevron-left' color='#767676' size={24} onTouchEnd={onPressPreviousMonth} />
+
+    if (Platform.OS === 'android') {
+      return (
+        <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('lightgray', true)}>
+          { chevron }        
+        </TouchableNativeFeedback>
+      );
+    }
+    else {
+      return chevron;
+    }
+  }
+  
   return (
     <View style={styles.container}>
-      <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('lightgray', true)}>
-        <Feather name='chevron-left' color='#767676' size={24} onTouchEnd={onPressPreviousMonth} />
-      </TouchableNativeFeedback>
-
-      <Text style={styles.range}>
-        {`${dateRange}'s Transactions`}
-      </Text>
-
-      <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('lightgray', true)}>
-        <Feather name='chevron-right' color='#767676' size={24} onTouchEnd={onPressNextMonth} />
-      </TouchableNativeFeedback>
+      <TransactionNavigaton direction='previous' />
+      <Text style={styles.range}>{`${dateRange}'s Transactions`}</Text>
+      <TransactionNavigaton direction='next' />
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
 
