@@ -17,7 +17,6 @@ export default function HomeScreen() {
   const transactions = useSelector(state => selectTransactionsByDate(state, year, month));
   const transactionsLoading = useSelector(transactionIsLoadingSelector);
 
-
   useEffect(() => {
     dispatch(fetchTransactions())
   }, [ year, month, dispatch ]);
@@ -27,7 +26,7 @@ export default function HomeScreen() {
       
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <TransactionRange />
-        { transactionsLoading === 'pending'
+        { transactionsLoading === 'pending' && !transactions
         ? <ActivityIndicator size="large" color='lightgray' />
         : <TransactionTable transactions={transactions} />
         }

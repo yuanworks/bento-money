@@ -13,7 +13,7 @@ export default function TransactionTable({ transactions }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.table}>
       <View style={styles.header}>
         <Text style={styles.th}>Date</Text>
         <Text style={styles.th}>Payee</Text>
@@ -28,11 +28,11 @@ export default function TransactionTable({ transactions }) {
 
 const styles = StyleSheet.create({
 
-  container: {
-    width: '94%',
+  table: {
+    alignSelf: 'center',
     borderWidth: 1,
     borderColor: 'lightgray',
-    marginHorizontal: 'auto',
+    width: '94%',
 
     shadowOffset: { width: 1, height: 1 },
     shadowColor: 'black',
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
 
   noTransactions: {
-    textAlign: 'center',
+    alignSelf: 'center',
     fontSize: 20,
     marginVertical: 20,
   },
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
+    backgroundColor: 'white',
   },
 
   th: {

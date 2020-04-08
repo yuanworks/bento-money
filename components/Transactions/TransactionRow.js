@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
 
   payee: {
-    flex: 3,
+    flex: 4,
     fontSize: 12,
   },
 
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'lightgray',
     padding: 12,
+    backgroundColor: 'white',
   },
 
   evenRow: {
@@ -66,20 +67,19 @@ const styles = StyleSheet.create({
   },
 
   amountContainer: {
-    flex: 2,
     display: 'flex',
     flexDirection: 'row',
   },
 
   currency: {
-    width: 40,
+    width: 20,
     fontFamily: 'space-mono',
     fontSize: 12,
   },
 
   amount: {
     textAlign: 'right',
-    width: 100,
+    width: 90,
     fontFamily: 'space-mono',
     fontSize: 12,
   },

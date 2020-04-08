@@ -42,8 +42,10 @@ const transactionsSlice = createSlice({
 
   reducers: {
     setRange: (state, action) => {
-      state.year = action.payload.year;
-      state.month = action.payload.month;
+      if (action.payload) {
+        state.year = action.payload.year;
+        state.month = action.payload.month;
+      }
     }
   },
 
