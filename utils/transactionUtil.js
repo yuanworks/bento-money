@@ -25,3 +25,25 @@ export function sortTransactions(transactions, sortBy, direction) {
     return direction === 'asc' ? t1[sortBy] - t2[sortBy] : t2[sortBy] - t1[sortBy]
   });
 }
+
+// return previous month in { year, date } format: 
+export function previousMonth(date = null) {
+  return changeMonth(date, 'substract');
+}
+
+export function nextMonth(date = null) {
+  return changeMonth(date, 'add');
+}
+
+export function changeMonth(date = null, direction) {
+
+  let momentDate = date ? moment(date) : moment();
+
+  if (momentDate.isValid()) {
+    momentDate = direction === 'substract' ? momentDate.subtract(1, 'month') : momentDate.add(1, 'month');
+    return { month: momentDate.month() + 1, year: momentDate.year() }
+  }
+
+  return null;
+
+}

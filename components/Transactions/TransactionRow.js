@@ -12,10 +12,10 @@ export function TransactionRow({ transaction, even }) {
   return (
     <View style={[ styles.row, even && styles.evenRow ]}>
       <Text style={styles.date}>{ formattedDate || date }</Text>
-      <TextInput style={styles.payee} value={payee} />
+      <Text style={styles.payee}>{payee}</Text>
       <View style={styles.amountContainer}>
         <Text style={[ styles.currency, amount < 0 && styles.income ]}>{ currencies[currency] || currency }</Text>
-        <TextInput style={[ styles.amount, amount < 0 && styles.income ]} value={displayNumber(-amount)} />
+        <Text style={[ styles.amount, amount < 0 && styles.income ]}>{displayNumber(-amount)}</Text>
       </View>
     </View>
   );
@@ -34,10 +34,13 @@ const styles = StyleSheet.create({
   
   date: {
     flex: 1,
+    fontFamily: 'space-mono',
+    fontSize: 12,
   },
 
   payee: {
     flex: 3,
+    fontSize: 12,
   },
 
   row: {
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: 'lightgray',
-    padding: 8,
+    padding: 12,
   },
 
   evenRow: {
@@ -69,14 +72,16 @@ const styles = StyleSheet.create({
   },
 
   currency: {
-    width: 50,
+    width: 40,
     fontFamily: 'space-mono',
+    fontSize: 12,
   },
 
   amount: {
     textAlign: 'right',
     width: 100,
     fontFamily: 'space-mono',
+    fontSize: 12,
   },
 
 });

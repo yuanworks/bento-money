@@ -14,15 +14,15 @@ const styles = StyleSheet.create({
 
   button: {
     position: 'absolute',
-    top: '2%',
-    right: '5%',
+    bottom: '2%',
+    right: '4%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 40,
-    width: 40,
+    height: 48,
+    width: 48,
     borderRadius: '50%',
-    backgroundColor: 'blue',
+    backgroundColor: '#fbb700',
 
     shadowOffset: { width: 2, height: 2 },
     shadowColor: 'black',
@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
 
   plusIcon: {
     color: 'white',
-    fontSize: 20,
-    lineHeight: 20,
+    fontSize: 26,
+    lineHeight: 26,
   },
 
   

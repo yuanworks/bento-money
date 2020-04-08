@@ -1,6 +1,7 @@
 import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
 import { normalizeTransactions, sortTransactions } from '../utils/transactionUtil';
 import * as transactionsAPI from '../apis/transactionsAPI';
+import moment from 'moment';
 
 // INITIAL STATE
 // -------------
@@ -8,6 +9,8 @@ const initialState = {
   loading  : 'idle',
   error    : null,
   entities : {},
+  year     : null, // defaults to current year
+  month    : null, // defaults to current month
   sortBy   : 'id',
   sortDir  : 'desc',
 };
@@ -16,7 +19,19 @@ const initialState = {
 // ------
 export const fetchTransactions = createAsyncThunk(
   'transactions/fetch',
-  async (arg, thunkAPI) => transactionsAPI.fetchAll(),
+  async (_, { getState }) => {
+    const { year, month } = getState().transactions;
+    if (!year || !month) {
+      return transactionsAPI.fetchAll();
+    }
+    else {
+      const momentDate = moment().year(year).month(month - 1);
+      const start_date = momentDate.startOf('month').format('YYYY-MM-DD');
+      const end_date = momentDate.endOf('month').format('YYYY-MM-DD');
+
+      return transactionsAPI.fetchAll({ start_date, end_date });
+    }
+  }
 )
 
 // SLICE
@@ -24,6 +39,13 @@ export const fetchTransactions = createAsyncThunk(
 const transactionsSlice = createSlice({
   name: 'transactions',
   initialState,
+
+  reducers: {
+    setRange: (state, action) => {
+      state.year = action.payload.year;
+      state.month = action.payload.month;
+    }
+  },
 
   extraReducers: {
 
@@ -43,18 +65,27 @@ const transactionsSlice = createSlice({
   }
 });
 
-// SELECTORS
-// ---------
+// EXPORTS
+// -------
+
+// Async Thunks -->
 export const selectTransactionsByDate = createSelector(
   state => state.transactions,
   (_, year, __) => year,
   (_, __, month) => month,
 
   (transactions, year, month) => {
-    return transactions.entities[year] && sortTransactions(transactions.entities[year][month], transactions.sortBy, transactions.sortDir)
+    return transactions.entities[year] && transactions.entities[year][month] && sortTransactions(transactions.entities[year][month], transactions.sortBy, transactions.sortDir)
   }
 );
 
+// Actions -->
+export const { setRange } = transactionsSlice.actions;
+
+// Selectors -->
 export const transactionIsLoadingSelector = state => state.transactions.loading;
+export const transactionYearSelector = state => state.transactions.year;
+export const transactionMonthSelector = state => state.transactions.month;
+
 
 export default transactionsSlice.reducer;
