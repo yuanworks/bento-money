@@ -17,7 +17,6 @@ export default function TransactionRange() {
 
   const onPressPreviousMonth = () => dispatch(setRange(previousMonth(momentDate && momentDate.format('YYYY-MM-DD'))));
   const onPressNextMonth = () => dispatch(setRange(nextMonth(momentDate && momentDate.format('YYYY-MM-DD'))));
-  console.log('year, month:', year, month);
 
   return (
     <View style={styles.container}>

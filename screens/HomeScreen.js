@@ -14,7 +14,6 @@ export default function HomeScreen() {
   const year = useSelector(transactionYearSelector) || moment().year();
   const month = useSelector(transactionMonthSelector) || moment().month() + 1;
 
-  console.log('year, month:', year, month);
   const transactions = useSelector(state => selectTransactionsByDate(state, year, month));
   const transactionsLoading = useSelector(transactionIsLoadingSelector);
 
