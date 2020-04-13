@@ -7,7 +7,7 @@ import { fetchTransactions, selectTransactionsByDate, transactionIsLoadingSelect
 import TransactionRange from '../components/Transactions/TransactionRange';
 import moment from 'moment';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
 
   const dispatch = useDispatch();
 
@@ -23,6 +23,8 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+
+      <Button title="hodor" onPress={() => navigation.navigate('EditTransaction')} />
       
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <TransactionRange />

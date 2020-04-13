@@ -12,3 +12,5 @@ yarn start
 - [ ] Add sorting by dollar (or default currency) calculated value
 - [ ] Remove placeholder React Native/Nav/Expo code
 - [ ] Add new transaction
+- [ ] Dark Mode
+- [ ] Get available currencies from all transactions

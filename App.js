@@ -7,11 +7,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
+import HomeScreen from './screens/HomeScreen';
 import useLinking from './navigation/useLinking';
 
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './slices';
+import { EditTransactionScreen } from './screens/EditTransactionScreen';
 
 const store = configureStore({
   reducer: rootReducer,
@@ -59,7 +61,13 @@ export default function App(props) {
       <Provider store={store}>
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Home">
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="EditTransaction" component={EditTransactionScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+          {/* <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
             <Stack.Navigator>
               <Stack.Screen
                 name="Root"
@@ -73,7 +81,7 @@ export default function App(props) {
                 // }}
               />
             </Stack.Navigator>
-          </NavigationContainer>
+          </NavigationContainer> */}
         </View>
       </Provider>
     );
