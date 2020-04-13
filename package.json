@@ -23,6 +23,7 @@
     "expo-asset": "~8.0.0",
     "expo-constants": "~8.0.0",
     "expo-font": "~8.0.0",
+    "expo-secure-store": "~8.0.0",
     "expo-web-browser": "~8.0.0",
     "moment": "^2.24.0",
     "react": "~16.9.0",
@@ -37,7 +38,8 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0",
-    "jest-expo": "~36.0.1"
+    "jest-expo": "~36.0.1",
+    "react-native-dotenv": "^0.2.0"
   },
   "private": true
 }

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchTransactions, selectTransactionsByDate, transactionIsLoadingSelector, transactionYearSelector, transactionMonthSelector } from '../slices/transactionsSlice';
 import TransactionRange from '../components/Transactions/TransactionRange';
 import moment from 'moment';
+import * as SecureStore from 'expo-secure-store';
 
 export default function HomeScreen({ navigation }) {
 
@@ -21,6 +22,15 @@ export default function HomeScreen({ navigation }) {
     dispatch(fetchTransactions())
   }, [ year, month, dispatch ]);
 
+  // only for mobile
+  // SecureStore.getItemAsync('lunch_money_access_token').then(response => console.log('response:', response));
+  
+  // SecureStore.setItemAsync('lunch_money_access_token', 'hiho').then(response =>
+  //   console.log('response:', response)
+  // );
+  
+  // SecureStore.getItemAsync('lunch_money_access_token').then(response => console.log('response:', response));
+  
   return (
     <View style={styles.container}>
 

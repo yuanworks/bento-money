@@ -23,8 +23,8 @@ export default function TransactionRange() {
   const TransactionNavigaton = ({ direction }) => {
 
     const chevron = (direction === 'next')
-    ? <Feather name='chevron-right' color='#767676' size={24} onTouchEnd={onPressNextMonth} />
-    : <Feather name='chevron-left' color='#767676' size={24} onTouchEnd={onPressPreviousMonth} />
+    ? <Feather name='chevron-right' color='#767676' size={24} onPress={onPressNextMonth} />
+    : <Feather name='chevron-left' color='#767676' size={24} onPress={onPressPreviousMonth} />
 
     if (Platform.OS === 'android') {
       return (
