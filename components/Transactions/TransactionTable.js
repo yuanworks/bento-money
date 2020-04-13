@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
 
   noTransactions: {
     alignSelf: 'center',
-    fontSize: 20,
     marginVertical: 20,
   },
 
