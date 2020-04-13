@@ -22,7 +22,7 @@ LUNCH_MONEY_ACCESS_TOKEN=[token] # replace [token] with your token
 
 Be aware that this token should be kept a secret to the outside world. Should you accidentally share it or commit it, immediately go to your Lunch Money dashboard to expire the token and get a new one.
 
-After changing your access token, you need to restart the development environment. If you change access tokens, changing the .env file may not refresh the variables, in such case you will need to first update the .env file (add an extra line break), then edit the `transactionsAPI.js` file while the application is running and retry.  ¯\_(ツ)_/¯
+After changing your access token, you need to restart the development environment. If you change access tokens, changing the .env file may not refresh the variables, in such case you will need to first update the .env file (add an extra line break), then edit the `transactionsAPI.js` file while the application is running and retry.  [¯\\_(ツ)_/¯](https://github.com/zetachang/react-native-dotenv/issues/20#issuecomment-415384662).
 
 ### Disclaimer
 

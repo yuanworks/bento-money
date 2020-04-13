@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import Touchable from '../components/layout/Touchable';
 
 export function EditTransactionScreen({ navigation }) {
   
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button onPress={'hodor'} title="+1" color="red" />
+        <Touchable>
+          <Text style={styles.addButton}>Add</Text>
+        </Touchable>
       ),
     });
   }, [navigation]);
@@ -17,3 +20,11 @@ export function EditTransactionScreen({ navigation }) {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+
+  addButton: {
+    marginEnd: 10,
+    textTransform: "uppercase",
+  },
+})
