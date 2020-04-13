@@ -20,7 +20,7 @@ You will need to set up your own Access Key by visiting getting an [access token
 LUNCH_MONEY_ACCESS_TOKEN=[token] # replace [token] with your token
 ```
 
-Be aware that this token should not be kept secret. Should you accidentally share it or commit it, immediately go to your Lunch Money dashboard to expire the token and get a new one.
+Be aware that this token should be kept a secret to the outside world. Should you accidentally share it or commit it, immediately go to your Lunch Money dashboard to expire the token and get a new one.
 
 ### Disclaimer
 
