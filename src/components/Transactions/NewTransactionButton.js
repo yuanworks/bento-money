@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, TouchableHighlight, Text } from 'react-native';
 
-export default function NewTransactionButton() {
+export default function NewTransactionButton({ navigation }) {
 
   return (
-    <View style={styles.button}>
+    <TouchableHighlight style={styles.button} onPress={() => navigation.navigate('NewTransaction')}>
       <Text style={styles.plusIcon}>+</Text>
-    </View>
+    </TouchableHighlight>
   );
 }
 
@@ -19,10 +19,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 48,
-    width: 48,
+    height: 52,
+    width: 52,
     borderRadius: '50%',
     backgroundColor: '#fbb700',
+    borderColor: 'white',
+    borderWidth: 1,
 
     shadowOffset: { width: 2, height: 2 },
     shadowColor: 'black',
@@ -33,10 +35,8 @@ const styles = StyleSheet.create({
 
   plusIcon: {
     color: 'white',
-    fontSize: 26,
-    lineHeight: 26,
+    fontSize: 32,
+    marginBottom: 4,
   },
-
-  
 
 });

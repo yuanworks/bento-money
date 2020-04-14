@@ -41,7 +41,7 @@ export default function TransactionRange() {
   return (
     <View style={styles.container}>
       <TransactionNavigaton direction='previous' />
-      <Text style={styles.range}>{`${dateRange}'s Transactions`}</Text>
+      <Text style={styles.range}>{ dateRange }</Text>
       <TransactionNavigaton direction='next' />
     </View>
   );

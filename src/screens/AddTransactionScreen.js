@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Touchable from '../components/layout/Touchable';
+import HeaderAction from '../components/layout/HeaderAction';
 
-export function EditTransactionScreen({ navigation }) {
+export function AddTransactionScreen({ navigation }) {
   
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Touchable>
-          <Text style={styles.addButton}>Add</Text>
-        </Touchable>
+        <HeaderAction>
+          <Text>ADD</Text>
+        </HeaderAction>
       ),
     });
   }, [navigation]);
@@ -23,8 +24,4 @@ export function EditTransactionScreen({ navigation }) {
 
 const styles = StyleSheet.create({
 
-  addButton: {
-    marginEnd: 10,
-    textTransform: "uppercase",
-  },
-})
+});

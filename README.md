@@ -42,3 +42,4 @@ TBD.
 - [ ] Add new transaction
 - [ ] Dark Mode
 - [ ] Get available currencies from all transactions
+- [ ] Sticky header on transactions

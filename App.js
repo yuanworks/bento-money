@@ -7,17 +7,18 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
-import HomeScreen from './screens/HomeScreen';
-import useLinking from './navigation/useLinking';
+import TransactionsScreen from './src/screens/TransactionsScreen';
+import useLinking from './src/navigation/useLinking';
 
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './slices';
-import { EditTransactionScreen } from './screens/EditTransactionScreen';
+import { AddTransactionScreen } from './src/screens/AddTransactionScreen';
 
 const store = configureStore({
   reducer: rootReducer,
 });
+
 
 const Stack = createStackNavigator();
 
@@ -26,7 +27,7 @@ export default function App(props) {
   const [initialNavigationState, setInitialNavigationState] = React.useState();
   const containerRef = React.useRef();
   const { getInitialState } = useLinking(containerRef);
-
+  
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
@@ -63,8 +64,8 @@ export default function App(props) {
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
-              <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="EditTransaction" component={EditTransactionScreen} />
+              <Stack.Screen name="Transactions" component={TransactionsScreen} />
+              <Stack.Screen name="NewTransaction" component={AddTransactionScreen} options={{ title: 'New Transaction' }} />
             </Stack.Navigator>
           </NavigationContainer>
           {/* <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
