@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, Button, Platform } from "react-native";
 import moment from 'moment';
 import { Feather } from '@expo/vector-icons';
-import { previousMonth, nextMonth } from '../../utils/transactionUtil';
+import { previousMonth, nextMonth } from '../../../utils/transactionUtil';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRange, transactionYearSelector, transactionMonthSelector } from '../../slices/transactionsSlice';
 import { TouchableNativeFeedback } from 'react-native-gesture-handler';
