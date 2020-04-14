@@ -9,13 +9,16 @@ export function TransactionRow({ transaction, even }) {
   const momentDate = moment(date);
   const formattedDate = momentDate.isValid() && momentDate.format('MM/DD');
 
+  // negative amounts are income:
+  const incomeStyle = amount < 0 ? styles.income : null;
+
   return (
     <View style={[ styles.row, even && styles.evenRow ]}>
-      <Text style={styles.date}>{ formattedDate || date }</Text>
-      <Text style={styles.payee}>{payee}</Text>
+      <Text style={[ styles.date, incomeStyle ]}>{ formattedDate || date }</Text>
+      <Text style={[styles.payee, incomeStyle ]}>{payee}</Text>
       <View style={styles.amountContainer}>
-        <Text style={[ styles.currency, amount < 0 && styles.income ]}>{ currencies[currency] || currency }</Text>
-        <Text style={[ styles.amount, amount < 0 && styles.income ]}>{displayNumber(-amount)}</Text>
+        <Text style={[ styles.currency, incomeStyle ]}>{ currencies[currency] || currency }</Text>
+        <Text style={[ styles.amount, incomeStyle ]}>{displayNumber(-amount)}</Text>
       </View>
     </View>
   );
@@ -36,11 +39,13 @@ const styles = StyleSheet.create({
     flex: 1,
     fontFamily: 'space-mono',
     fontSize: 12,
+    marginRight: 4,
   },
 
   payee: {
     flex: 4,
     fontSize: 12,
+    lineHeight: 17,
   },
 
   row: {
@@ -75,6 +80,7 @@ const styles = StyleSheet.create({
     width: 20,
     fontFamily: 'space-mono',
     fontSize: 12,
+    textAlign: "center",
   },
 
   amount: {
