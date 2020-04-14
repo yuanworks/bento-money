@@ -6,14 +6,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import BottomTabNavigator from './navigation/BottomTabNavigator';
-import HomeScreen from './screens/HomeScreen';
-import useLinking from './navigation/useLinking';
+import BottomTabNavigator from './src/navigation/BottomTabNavigator';
+import HomeScreen from './src/screens/HomeScreen';
+import useLinking from './src/navigation/useLinking';
 
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './slices';
-import { EditTransactionScreen } from './screens/EditTransactionScreen';
+import rootReducer from './src/slices';
+import { EditTransactionScreen } from './src/screens/EditTransactionScreen';
 
 const store = configureStore({
   reducer: rootReducer,
