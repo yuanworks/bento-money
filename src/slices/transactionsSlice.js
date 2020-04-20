@@ -9,10 +9,11 @@ const initialState = {
   loading  : 'idle',
   error    : null,
   entities : {},
-  year     : null, // defaults to current year
-  month    : null, // defaults to current month
+  year     : null,     // defaults to current year
+  month    : null,     // defaults to current month
   sortBy   : 'id',
   sortDir  : 'desc',
+  draft    : {},
 };
 
 // THUNKS
@@ -46,7 +47,11 @@ const transactionsSlice = createSlice({
         state.year = action.payload.year;
         state.month = action.payload.month;
       }
-    }
+    },
+
+    updateTransaction: (state, action) => {
+      state.draft = {...state.draft, ...action.payload }
+    },
   },
 
   extraReducers: {
@@ -82,12 +87,13 @@ export const selectTransactionsByDate = createSelector(
 );
 
 // Actions -->
-export const { setRange } = transactionsSlice.actions;
+export const { setRange, updateTransaction } = transactionsSlice.actions;
 
 // Selectors -->
 export const transactionIsLoadingSelector = state => state.transactions.loading;
 export const transactionYearSelector = state => state.transactions.year;
 export const transactionMonthSelector = state => state.transactions.month;
+export const selectTransactionDraft = state => state.transactions.draft;
 
 
 export default transactionsSlice.reducer;

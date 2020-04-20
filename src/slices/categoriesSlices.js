@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as categoriesAPI from '../apis/categoriesAPI';
 
 const initialState = {
-  entities: {},
+  entities: null,
   loading: 'idle',
 };
 
@@ -27,5 +27,7 @@ const categoriesSlice = createSlice({
     }
   }
 });
+
+export const selectCategories = state => state.categories.entities;
 
 export default categoriesSlice.reducer;
