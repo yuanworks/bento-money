@@ -29,4 +29,6 @@ describe('parseAmount', () => {
 console.log(parseAmount('100.50 twd'));
 console.log(parseAmount('100.50 円'));
 console.log(parseAmount('15000￥'));
+console.log(parseAmount('nt 150'));
+console.log(parseAmount('300euros'));
 */

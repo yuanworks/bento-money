@@ -42,6 +42,7 @@ export const CURRENCY_LOOKUP = (function createAliases() {
 
 export function parseAmount(value) {
   
+  // digits, colons, and periods will get replaced by a white-space and then split:
   const currencyAlias = value.replace(/[\d,.]/g, ' ').split(/\s/g).find(searchString => {
     const possibleCurrency = searchString.trim();
     return (possibleCurrency.length > 0 && CURRENCY_LOOKUP[possibleCurrency]);
