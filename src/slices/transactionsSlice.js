@@ -32,7 +32,7 @@ export const fetchTransactions = createAsyncThunk(
       return transactionsAPI.fetchAll({ start_date, end_date });
     }
   }
-)
+);
 
 // SLICE
 // -----

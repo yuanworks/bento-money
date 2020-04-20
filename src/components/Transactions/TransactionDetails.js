@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TextInput, View, StyleSheet, Picker } from 'react-native';
 import BentoInput from '../layout/BentoInput';
+import { useDispatch } from 'react-redux';
+import { fetchCategories } from '../../slices/categoriesSlices';
 
 export function TransactionDetails() {
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCategories())
+  }, []);
+  
   return (
     <View style={styles.container}>
       <BentoInput placeholder="Payee" />

@@ -33,14 +33,9 @@ function queryString(obj) {
   return keyValuePairs.join('&');
 }
 
-
-export default class API {
-
-  static async get(args) {
-    return await fetchJson(args);
-  }
-
-  static async post(args) {
-    return await fetchJson({ method: 'POST', ...args })
-  }
+const API = {
+  get  : async (args) => await fetchJson(args),
+  post : async (args) => await fetchJson({ method: 'POST', ...args }),
 }
+
+export default API;
