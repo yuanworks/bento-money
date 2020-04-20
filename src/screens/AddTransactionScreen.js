@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Touchable from '../components/layout/Touchable';
 import HeaderAction from '../components/layout/HeaderAction';
+import { TransactionDetails } from '../components/Transactions/TransactionDetails';
 
 export function AddTransactionScreen({ navigation }) {
   
@@ -16,12 +17,15 @@ export function AddTransactionScreen({ navigation }) {
   }, [navigation]);
 
   return (
-    <View>
-      <Text>hi</Text>
+    <View style={styles.container}>
+      <TransactionDetails />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  }
 });
