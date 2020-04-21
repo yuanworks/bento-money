@@ -4,6 +4,7 @@ import BentoInput from '../layout/BentoInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories, selectCategories } from '../../slices/categoriesSlices';
 import { updateTransaction, selectTransactionDraft } from '../../slices/transactionsSlice';
+import AmountInput from '../layout/AmountInput';
 
 export function TransactionDetails() {
 
@@ -29,6 +30,7 @@ export function TransactionDetails() {
           <Picker.Item key={category.id} value={category.id} label={category.name} />
         ))}
       </Picker>
+      <AmountInput update={update} currency={draft.currency} />
     </View>
   );
 }

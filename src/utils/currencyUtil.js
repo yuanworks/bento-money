@@ -1,13 +1,14 @@
-const MAIN_CURRENCY = 'usd';
+export const MAIN_CURRENCY = 'usd';
 
-const CURRENCIES = {
+export const CURRENCIES = {
   'usd' : "$",
   'twd' : "NT",
-  'crc' : "₡"
+  'crc' : "₡",
+  'eur' : "€",
 };
 
 const CURRENCY_ALIASES = {
-  'usd' : [ 'us', '$' ],
+  'usd' : [ 'us', '$', 'dollar' ],
   'twd' : [ 'nt', 'ntd' ],
   'crc' : [ 'colones', 'colon', 'colón' ],
   'eur' : [ 'euro', '€', 'euros'],
@@ -22,7 +23,6 @@ const CURRENCY_ALIASES = {
 //   'ntd' : 'twd',
 //   ...
 // }
-
 export const CURRENCY_LOOKUP = (function createAliases() {
 
   const aliases = {};
@@ -37,7 +37,7 @@ export const CURRENCY_LOOKUP = (function createAliases() {
 
 // Receives a string and parses the number amount and if a currency (or alias) is used.
 // TODO: for now, it's only parsing based on the US format, other valid formats
-// 12,50,00,000 rupee / 1 000 rub / 1.500,50 colones etc/etc/
+// 12,50,00,000 rupee / 1 000 rub / 1.300,50 colones etc/etc/
 // -> try currency.js / dinero.js / walletjs
 
 export function parseAmount(value) {
