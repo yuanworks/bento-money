@@ -11,7 +11,7 @@ const initialState = {
   entities : {},
   year     : null,     // defaults to current year
   month    : null,     // defaults to current month
-  sortBy   : 'id',
+  sortBy   : 'date',
   sortDir  : 'desc',
   draft    : {},
 };
@@ -32,6 +32,15 @@ export const fetchTransactions = createAsyncThunk(
 
       return transactionsAPI.fetchAll({ start_date, end_date });
     }
+  }
+);
+
+export const addTransaction = createAsyncThunk(
+  'transactions/add',
+  async (_, { getState }) => {
+    const { draft } = getState().transactions;
+
+    return transactionsAPI.insertTransaction({ transactions: [ draft ] }); //draft);
   }
 );
 
@@ -56,6 +65,7 @@ const transactionsSlice = createSlice({
 
   extraReducers: {
 
+    // fetch
     [fetchTransactions.pending]: state => {
       state.loading = 'pending';
     },
@@ -68,6 +78,18 @@ const transactionsSlice = createSlice({
     [fetchTransactions.rejected]: (state, action) => {
       state.loading = 'idle';
       state.error = action.error;
+    },
+
+    // add
+    [addTransaction.fulfilled] : (state, action) => {
+      const { ids } = action.payload;
+
+      if (ids && ids.length > 0) {
+        const newTransaction = [{ ...state.draft, id: ids[0] }];
+        state.entities = normalizeTransactions(newTransaction, state.entities);
+      }
+
+      state.draft = {};
     }
   }
 });

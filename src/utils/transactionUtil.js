@@ -21,9 +21,24 @@ export function normalizeTransactions(newTransactions, existingTransactions) {
 }
 
 export function sortTransactions(transactions, sortBy, direction) {
-  return Object.values(transactions).sort((t1, t2) => {
-    return direction === 'asc' ? t1[sortBy] - t2[sortBy] : t2[sortBy] - t1[sortBy]
-  });
+
+  const sort = (t1, t2) => {
+    if (typeof t1[sortBy] === 'string') {
+      if (direction === 'asc') {
+        return (t1[sortBy] > t2[sortBy]) ? 1 : -1;
+      }
+      else {
+        return (t2[sortBy] > t1[sortBy]) ? 1 : -1;
+      }
+    }
+
+    return direction === 'asc' ? t1[sortBy] - t2[sortBy] : t2[sortBy] - t1[sortBy];
+  }
+
+  return Object.values(transactions).sort(sort); //(t1, t2) => {
+  //   console.log('t1[sortBy], t2[sortBy]:', t1[sortBy], t2[sortBy]);
+  //   return direction === 'asc' ? t1[sortBy] - t2[sortBy] : t2[sortBy] - t1[sortBy]
+  // });
 }
 
 // return previous month in { year, date } format: 

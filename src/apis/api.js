@@ -12,13 +12,16 @@ const DEFAULT_HEADERS = {
   Authorization  : `Bearer ${accessToken}`,
 };
 
-async function fetchJson({ method='GET', domain = LUNCH_MONEY_DOMAIN, version = LUNCH_MONEY_VERSION, endpoint, headers = DEFAULT_HEADERS, params }) {
+async function fetchJson({ method='GET', domain = LUNCH_MONEY_DOMAIN, version = LUNCH_MONEY_VERSION, endpoint, headers = DEFAULT_HEADERS, params, data }) {
 
   const url = domain + '/' + version + '/' + endpoint + '?' + queryString(params);
+
+  const body = data ? JSON.stringify(data) : undefined;
 
   const response = await fetch(url, {
     headers,
     method,
+    body,
   });
 
   return await response.json();
