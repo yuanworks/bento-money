@@ -3,7 +3,7 @@ import { LUNCH_MONEY_ACCESS_TOKEN } from 'react-native-dotenv';
 const LUNCH_MONEY_DOMAIN = 'https://dev.lunchmoney.app';
 const LUNCH_MONEY_VERSION = 'v1';
 
-// accessToken can eventually be enabled through an "add access token screen"
+// TODO -> accessToken can eventually be enabled through an "add access token screen"
 const accessToken = LUNCH_MONEY_ACCESS_TOKEN;
 
 const DEFAULT_HEADERS = {

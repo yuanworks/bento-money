@@ -35,10 +35,7 @@ export function sortTransactions(transactions, sortBy, direction) {
     return direction === 'asc' ? t1[sortBy] - t2[sortBy] : t2[sortBy] - t1[sortBy];
   }
 
-  return Object.values(transactions).sort(sort); //(t1, t2) => {
-  //   console.log('t1[sortBy], t2[sortBy]:', t1[sortBy], t2[sortBy]);
-  //   return direction === 'asc' ? t1[sortBy] - t2[sortBy] : t2[sortBy] - t1[sortBy]
-  // });
+  return Object.values(transactions).sort(sort);
 }
 
 // return previous month in { year, date } format: 

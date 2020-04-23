@@ -61,6 +61,10 @@ const transactionsSlice = createSlice({
     updateTransaction: (state, action) => {
       state.draft = {...state.draft, ...action.payload }
     },
+
+    clearTransactionDraft: state => {
+      state.draft = {};
+    },
   },
 
   extraReducers: {
@@ -109,7 +113,7 @@ export const selectTransactionsByDate = createSelector(
 );
 
 // Actions -->
-export const { setRange, updateTransaction } = transactionsSlice.actions;
+export const { setRange, updateTransaction, clearTransactionDraft } = transactionsSlice.actions;
 
 // Selectors -->
 export const transactionIsLoadingSelector = state => state.transactions.loading;

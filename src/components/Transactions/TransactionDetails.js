@@ -3,11 +3,11 @@ import { View, StyleSheet, Picker, Platform } from 'react-native';
 import BentoInput from '../layout/BentoInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories, selectCategories } from '../../slices/categoriesSlices';
-import { updateTransaction, selectTransactionDraft } from '../../slices/transactionsSlice';
+import { updateTransaction, selectTransactionDraft, clearTransactionDraft } from '../../slices/transactionsSlice';
 import AmountInput from '../layout/AmountInput';
 import moment from 'moment';
 
-export function TransactionDetails() {
+export function TransactionDetails({ newTransaction }) {
 
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
@@ -15,7 +15,9 @@ export function TransactionDetails() {
 
   useEffect(() => {
     !categories && dispatch(fetchCategories());
-    if (!draft.date) {
+
+    if (newTransaction) {
+      dispatch(clearTransactionDraft());
       dispatch(updateTransaction({ date: moment().format('YYYY-MM-DD') }));
     }
   }, []);
@@ -23,14 +25,12 @@ export function TransactionDetails() {
   const update = data => dispatch(updateTransaction(data));
   const updateCategory = value => update({ category_id: value === 'uncategorized' ? undefined : parseInt(value, 10) });
 
-  const payee = draft.payee || '';
-
   return (
     <View style={styles.container}>
-      <BentoInput placeholder="Payee" value={payee} onChangeText={text => update({ payee: text })} />
-      <BentoInput placeholder="Date" value={draft.date} onChangeText={text => update({ date: text })} />
-      <Picker style={styles.categoryPicker} onValueChange={updateCategory} value={payee.category_id || 'uncategorized'}>
-        <Picker.Item key='uncategorized' value='' label='Uncategorized' />
+      <BentoInput placeholder="Payee" value={draft.payee || ''} onChangeText={text => update({ payee: text })} />
+      <BentoInput placeholder="Date" value={draft.date || ''} onChangeText={text => update({ date: text })} />
+      <Picker style={styles.categoryPicker} onValueChange={updateCategory} value={draft.category_id || 'uncategorized'}>
+        <Picker.Item key='uncategorized' value='uncategorized' label='Uncategorized' />
         { categories && Object.values(categories).map(category => (
           <Picker.Item key={category.id} value={category.id} label={category.name} />
         ))}
@@ -48,9 +48,9 @@ const styles = StyleSheet.create({
   },
 
   categoryPicker: {
-    borderColor: Platform.OS === 'web' && 'transparent',
-    borderRadius: Platform.OS === 'web' && 0,
-    backgroundColor: Platform.OS === 'web' && 'transparent',
+    borderColor: Platform.OS === 'web' ? 'transparent' : undefined,
+    borderRadius: Platform.OS === 'web' ? 0 : undefined,
+    backgroundColor: Platform.OS === 'web' ? 'transparent' : undefined,
     borderBottomColor: 'lightgray',
     borderBottomWidth: 1,
     paddingHorizontal: 4,

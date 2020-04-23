@@ -1,6 +1,5 @@
-import React, { useLayoutEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Touchable from '../components/layout/Touchable';
+import React, { useLayoutEffect, useEffect } from 'react';
+import { View, Text, StyleSheet, ToastAndroid, Platform, Alert } from 'react-native';
 import HeaderAction from '../components/layout/HeaderAction';
 import { TransactionDetails } from '../components/Transactions/TransactionDetails';
 import { useDispatch } from 'react-redux';
@@ -10,11 +9,32 @@ export function AddTransactionScreen({ navigation }) {
   
   const dispatch = useDispatch();
 
+  const onPressAdd = () => {
+    dispatch(addTransaction()).then(response => {
+      if (response?.payload?.ids) {
+        if (Platform.OS === 'android') {
+          ToastAndroid.show('Transaction added succesfully!', ToastAndroid.SHORT);
+        }
+        else {
+          Alert.alert(
+            "Bento Money",
+            "Transaction added succesfully!",
+            [
+              { text: "OK" }
+            ],
+          );
+        }
+
+        navigation.goBack();
+      }
+    });
+  }
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <HeaderAction>
-          <Text onPress={() => dispatch(addTransaction())}>ADD</Text>
+          <Text onPress={onPressAdd}>ADD</Text>
         </HeaderAction>
       ),
     });
@@ -22,7 +42,7 @@ export function AddTransactionScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <TransactionDetails />
+      <TransactionDetails newTransaction />
     </View>
   )
 }
