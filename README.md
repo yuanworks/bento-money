@@ -30,7 +30,7 @@ I am a React developer (and a Redux fan) and I am just getting acquainted and le
 
 ## LICENSE
 
-TBD.
+MIT License.
 
 ## TODO
 
