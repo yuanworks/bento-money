@@ -1,4 +1,7 @@
-A React Native application for [Lunch Money](https://lunchmoney.app), with basic functionality.
+A React Native application for [Lunch Money](https://lunchmoney.app), with basic functionality:
+
+![bento_money_add_transaction](https://user-images.githubusercontent.com/3508123/93031806-3255d280-f660-11ea-999d-13ad73d4192e.gif)
+
 
 ## TO RUN
 
